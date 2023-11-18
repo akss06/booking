@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/static/details.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <a href="{{ url_for('index') }}">
+            <h1>Go back to Home page</h1>
+        </a>
+    </header>
+
+    <main>
+        <div class="hotel-container">
+            <div class="details">
+                <h1>{{ details[1] }}</h1>
+                <h1>{{ details[4] }}, {{ details[5] }}</h1>
+
+                <h1>{{ details[3] }}</h1>
+                <h1>Rating: {{ details[6] }}/10</h1>
+                <h1>Address: {{ details[2] }}</h1>
+            </div>
+
+            <img src="../static/images/{{ hotel_id }}.jpg">
+        </div>
+
+
+
+
+        <form action="{{ url_for('details')}}" method="post">
+            <ul class="booking">
+                <li>
+                    Check-in:
+                    <input type="date" name="check-in" min="{{ latest_date  }}" required>
+                </li>
+                <li>
+                    Check-out:
+                    <input type="date" name="check-out" min="{{ latest_date }}" required>
+                </li>
+
+
+
+
+
+                <li>
+                    {% for i in range(3) %}
+                    {% set room_name = ["Single room ($40)", "Double room ($80)", "Family room ($120)"][i] %}
+                    {% set is_available = rooms[i] == "Yes" %}
+                    <label class="{% if not is_available %}strikethrough{% endif %}">
+                        <input type="radio" name="room" value="{{ room_name }}" {% if not is_available %}disabled{%
+                            endif %}>
+                        {{ room_name }}
+                    </label>
+                    {% endfor %}
+
+
+
+
+                </li>
+
+
+            </ul>
+            <input type="hidden" name="hotel_id" value="{{ request.args.get('hotel_id') }}">
+            <button class="book-now">Book Now</button>
+        </form>
+
+
+
+
+
+    </main>
+</body>
+
+</html>

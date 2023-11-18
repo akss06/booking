@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bookings</title>
+    <link rel="stylesheet" href="../static/user_booking.css">
+</head>
+
+<body>
+    <header>
+        <h1>Your Bookings</h1>
+        <a href="{{ url_for('index') }}">
+            <h1>Go back to Home page</h1>
+        </a>
+    </header>
+
+    <main>
+        <ul class="booking-list">
+
+
+            {% for booking in bookings %}
+
+            <li class="booking-card">
+                <div class="booking-details">
+                    <h3>Hotel: {{ booking[2] }}</h3>
+                    <h3>Location: {{ booking[3] }}</h3>
+                    <p>Check-in: {{ booking[0] }}</p>
+                    <p>Check-out: {{ booking[1] }}</p>
+                    <p>Room type: {{ booking[4][0:11] }} </p>
+                    <p>Price: ${{ booking[5] }}</p>
+                    
+                </div>
+                <form action="{{ url_for('cancel_booking') }}" method="post">
+                    <div class="Cancel">
+                        <input type="hidden" name="hotel_name" value="{{ booking[2] }}">
+                        <input type="hidden" name=room_type value="{{ booking[4] }}">
+                        <button type="submit" class='cancel'>Cancel</button></p>
+
+                    </div>
+            </li>
+            </form>
+            {% endfor %}
+
+        </ul>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Hotel Booking Management. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

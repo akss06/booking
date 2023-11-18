@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Booking Management</title>
+  <link rel="stylesheet" href="../static/index.css">
+</head>
+
+<body>
+  <header>
+    {% if username %}
+    <a href="{{url_for('index')}}" class="link">
+      <h1>Book a Hotel</h1>
+      <a href="{{url_for('user_bookings')}}" class="link">
+        <h1>Your bookings</h1>
+        {% else %}
+        <a href="{{url_for('index')}}" class="link">
+          <h1>Book a Hotel</h1>
+        </a>
+        {% endif %}
+
+        <div class="user-buttons">
+          {% if username %}
+          <h3>Welcome, {{ username }}</h3>
+          <a href="{{url_for('logout')}}" class="link">Log out</a>
+          {% else %}
+          <a href="{{url_for('register')}}"><button>Register/Login</button></a>
+          {% endif %}
+
+        </div>
+  </header>
+
+  <main>
+    <form action="{{url_for('index')}}" method='post'>
+      <div class="container">
+        <section id="search-container">
+          <div class="search-form">
+            <input type="text" name="destination" placeholder="Destination" autocomplete="off">
+
+            <button type="submit">Search</button>
+          </div>
+        </section>
+    </form>
+
+
+    <section id="search-results">
+      {% for hotel in hotels %}
+      {% set hotel_id = hotel[0] %}
+      <div class="result-card">
+        <div class="hotel-details">
+          <div class="hotel">
+            <h1 name="hotel">{{ hotel[1] }}</h1>
+            <h1 name="country">{{ hotel[4] }}, {{ hotel[5] }}</h1>
+          </div>
+
+          <div class="desc">
+            <h2>{{ hotel[3] }}</h2>
+          </div>
+          <p>Breakfast Included</p>
+          <p>Free Cancellation till check-in</p>
+          <p>Rating: {{ hotel[6] }}/10</p>
+          <p>Cost: Depends on the room type and number of nights</p>
+
+
+
+
+          {% if username %}
+
+          <form action="{{ url_for('details')}}" method="get">
+            <input type="hidden" name="hotel_id" value="{{ hotel[0] }}">
+            <button class="book-now">Book Now</button>
+          </form>
+          {% else %}
+          <h3>Please Login or Register to book a hotel</h3>
+          {% endif %}
+        </div>
+
+        <img src="../static/images/{{ hotel_id }}.jpg">
+      </div>
+      {% endfor %}
+    </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Hotel Booking Management. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>
