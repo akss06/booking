@@ -46,15 +46,74 @@
 
 
                 <li>
-                    {% for i in range(3) %}
-                    {% set room_name = ["Single room ($40)", "Double room ($80)", "Family room ($120)"][i] %}
-                    {% set is_available = rooms[i] == "Yes" %}
-                    <label class="{% if not is_available %}strikethrough{% endif %}">
-                        <input type="radio" name="room" value="{{ room_name }}" {% if not is_available %}disabled{%
-                            endif %}>
-                        {{ room_name }}
-                    </label>
-                    {% endfor %}
+                    {% if rooms[0] == "Yes" and rooms[1] == "Yes" and rooms[2] == "Yes" %}
+                        <input type="radio" name="room" value="Single room ($40)">
+                        Single room ($40)
+                        <input type="radio" name="room" value="Double room ($80)">
+                        Double Standard room ($80)
+                        <input type="radio" name="room" value="Family room ($120)">
+                        Family room ($120)
+                   
+                    {% elif rooms[0] == "No" and rooms[1] == "Yes" and rooms[2] == "Yes"%} 
+                        <input type="radio" name="room" value="Single room ($40)" disabled>
+                        Single room ($40)
+                        <input type="radio" name="room" value="Double room ($80)">
+                        Double Standard room ($80)
+                        <input type="radio" name="room" value="Family room ($120)">
+                        Family room ($120)
+                
+                    {% elif rooms[0] == "No" and rooms[1] == "No" and rooms[2] == "Yes"%}
+                        <input type="radio" name="room" value="Single room ($40)" disabled>
+                        Single room ($40)
+                        <input type="radio" name="room" value="Double room ($80)" disabled>
+                        Double Standard room ($80)
+                        <input type="radio" name="room" value="Family room ($120)">
+                        Family room ($120)
+                
+                        {% elif rooms[0] == "Yes" and rooms[1] == "No" and rooms[2] == "Yes"%}
+                        <input type="radio" name="room" value="Single room ($40)">
+                        Single room ($40)
+                        <input type="radio" name="room" value="Double room ($80)" disabled>
+                        Double Standard room ($80)
+                        <input type="radio" name="room" value="Family room ($120)">
+                        Family room ($120)
+
+                        {% elif rooms[0] == "Yes" and rooms[1] == "Yes" and rooms[2] == "No"%}
+                        <input type="radio" name="room" value="Single room ($40)" >
+                        Single room ($40)
+                        <input type="radio" name="room" value="Double room ($80)" >
+                        Double Standard room ($80)
+                        <input type="radio" name="room" value="Family room ($120)" disabled>
+                        Family room ($120)
+
+                        {% elif rooms[0] == "Yes" and rooms[1] == "No" and rooms[2] == "Yes"%}
+                        <input type="radio" name="room" value="Single room ($40)" >
+                        Single room ($40)
+                        <input type="radio" name="room" value="Double room ($80)" disabled>
+                        Double Standard room ($80)
+                        <input type="radio" name="room" value="Family room ($120)" >
+                        Family room ($120)
+                        
+                        {% elif rooms[0] == "Yes" and rooms[1] == "No" and rooms[2] == "No"%}
+                        <input type="radio" name="room" value="Single room ($40)">
+                        Single room ($40)
+                        <input type="radio" name="room" value="Double room ($80)" disabled>
+                        Double Standard room ($80)
+                        <input type="radio" name="room" value="Family room ($120)" disabled>
+                        Family room ($120)
+                
+                
+                
+                        {% elif rooms[0] == "No" and rooms[1] == "Yes" and rooms[2] == "No"%}
+                        <input type="radio" name="room" value="Single room ($40)" disabled>
+                        Single room ($40)
+                        <input type="radio" name="room" value="Double room ($80)" >
+                        Double Standard room ($80)
+                        <input type="radio" name="room" value="Family room ($120)" disabled>
+                        Family room ($120)
+                
+                
+                        {% endif %}
 
 
 
